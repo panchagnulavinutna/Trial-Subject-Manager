@@ -47,34 +47,27 @@ namespace Trial_SubjectManager.Controllers
         // GET: Topic/Create
         public IActionResult Create()
         {
-            ViewData["SubjectId"] = new SelectList(_context.Subjects, "Id", "Id");
+            ViewData["Subjects"] = new SelectList(_context.Subjects, "Id", "Name");
             return View();
         }
+
 
         // POST: Topic/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,SubjectId")] Topic topic)
+        public async Task<IActionResult> Create([Bind("Name,Description,SubjectId")] Topic topic)
         {
-            Console.WriteLine("Creating topic");
+            if (ModelState.IsValid)
+            {
+                _context.Add(topic);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
 
-            
-                Console.WriteLine("Model is not valid");
-                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    Console.WriteLine(error.ErrorMessage);
-                }
-
-                ViewData["SubjectId"] = new SelectList(_context.Subjects, "Id", "Id", topic.SubjectId);
-                
-            
-
-            _context.Add(topic);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Index)); // Redirect after successful creation
+            ViewData["Subjects"] = new SelectList(_context.Subjects, "Id", "Name", topic.SubjectId);
+            return View(topic);
         }
 
 
@@ -134,14 +127,15 @@ namespace Trial_SubjectManager.Controllers
         // GET: Topic/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Topics == null)
             {
                 return NotFound();
             }
 
             var topic = await _context.Topics
-                .Include(t => t.Subject)
+                .Include(t => t.Subject)  // Ensure Subject data is included
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (topic == null)
             {
                 return NotFound();
@@ -149,6 +143,7 @@ namespace Trial_SubjectManager.Controllers
 
             return View(topic);
         }
+
 
         // POST: Topic/Delete/5
         [HttpPost, ActionName("Delete")]

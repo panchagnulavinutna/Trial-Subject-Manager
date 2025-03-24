@@ -55,12 +55,11 @@ namespace Trial_SubjectManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description")] Subject subject)
         {
-            if (ModelState.IsValid)
-            {
+            
                 _context.Add(subject);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+            
             return View(subject);
         }
 

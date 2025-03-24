@@ -1,22 +1,88 @@
-html {
-  font-size: 14px;
+/* Navbar (Header) Styling */
+.navbar {
+    background-color: #9370DB !important; /* Light violet */
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    .navbar .navbar-brand,
+    .navbar .nav-link {
+        color: white !important; /* White text */
+    }
+
+        .navbar .nav-link:hover {
+            color: #f8f9fa !important; /* Lighter shade on hover */
+        }
+
+/* Welcome Heading */
+h1 {
+    color: black !important; /* Black heading */
+    text-align: center;
+    margin-top: 20px;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* Footer Styling */
+footer {
+    background-color: #9370DB; /* Light violet */
+    color: black !important; /* Black text */
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+/* Ensure body takes full height for footer placement */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
-body {
-  margin-bottom: 60px;
+/* Main content should push the footer to the bottom */
+.container {
+    flex: 1;
+    color: black !important; /* Black text */
 }
+
+/* Style the table with thin borders */
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+    .table th,
+    .table td {
+        border: 1px solid #ccc; /* Thin border */
+        padding: 10px;
+        text-align: left;
+    }
+
+/* Add colors and styling to action buttons */
+.action-buttons a {
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+/* Specific button colors */
+.edit-btn {
+    background-color: #007bff; /* Blue */
+}
+
+.details-btn {
+    background-color: #28a745; /* Green */
+}
+
+.delete-btn {
+    background-color: #dc3545; /* Red */
+}
+
+/* Hover effects */
+.action-buttons a:hover {
+    opacity: 0.8;
+}
+

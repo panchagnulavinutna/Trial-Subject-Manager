@@ -1,1 +1,1 @@
-﻿Select * From Topic;
+﻿SELECT * FROM Topic;
